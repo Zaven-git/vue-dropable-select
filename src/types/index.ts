@@ -14,3 +14,11 @@ export interface DropDownItem {
   value: string;
 }
 
+export interface DragDropParams {
+  element: object;
+  newIndex: number;
+  oldIndex: number;
+}
+
+export type DragDropedValue = {moved:DragDropParams}
+

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VueDraggableNext class="dragArea list-group " :list="list" >
+    <VueDraggableNext class="dragArea list-group " :list="list" @change="changePositions">
       <div class="d-flex items-center my-3" v-for="(element, i) in list" :key="element.id">
         <Dropdown 
           @setSelectedValue="setSelectedValue" 
@@ -24,10 +24,10 @@
 import { computed, onMounted, ref } from 'vue'
 import Dropdown from './Dropdown.vue';
 import { VueDraggableNext } from 'vue-draggable-next'
-import { DropDownWrapperItem, SelectedValue } from '../../../types/index'
+import { DropDownWrapperItem, SelectedValue,DragDropedValue } from '../../../types/index'
 
 const props = defineProps(['minimum','maximum','defaultDropdowns','disableAdd','disableDelete'])
-const emit = defineEmits(['setProperties'])
+const emit = defineEmits(['setProperties','changePositions'])
 
 const dropdownList = ref([
   { title: 'California', value: "california" },
@@ -61,6 +61,10 @@ const setSelectedValue = (val: SelectedValue) => {
 
 const removeDropdown = (index: number) => {
   list.value.splice(index, 1)
+}
+
+const changePositions = (val:DragDropedValue) => {
+  emit('changePositions', val)
 }
 
 const addDropdownItem = () => {

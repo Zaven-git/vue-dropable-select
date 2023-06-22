@@ -6,18 +6,23 @@
       :disableAdd="false" 
       :disableDelete="false"
       :defaultDropdowns="[{ name: 'florida', id: 1 }]" 
-      @setProperties="setProperties" 
+      @setProperties="setProperties"
+      @changePositions="changePositions"
     />
   </v-col>
 </template>
 
 <script setup lang="ts">
 import DropdownWrapper from './partial/DropdownWrapper.vue';
-import { SelectedValue } from '../../types/index'
+import { SelectedValue,DragDropedValue } from '../../types/index'
 
-const emit = defineEmits(['setProperties'])
+const emit = defineEmits(['setProperties','changePositions'])
 
 const setProperties = (props: SelectedValue) => {
   emit('setProperties', props)
+}
+
+const changePositions = (val:DragDropedValue) => {
+  emit('changePositions', val)
 }
 </script>
